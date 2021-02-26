@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>toutes les catégories de colotte </title>
+    <link rel="stylesheet" href="../css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
@@ -57,14 +58,14 @@ try
  */
 
  
-  $sql2='SELECT COUNT(image.id_image) FROM image WHERE (image.id_article % 2)= ?';
-  $request2= $PDO->prepare($sql2);
-  $request2->bindValue(1,1);
-  $request2->execute();
+  // $sql2='SELECT COUNT(image.id_image) FROM image WHERE (image.id_article % 2)= ?';
+  // $request2= $PDO->prepare($sql2);
+  // $request2->bindValue(1,1);
+  // $request2->execute();
 
-  echo '<pre>';
-     print_r($request2->fetch(PDO::FETCH_ASSOC));
-  echo '</pre>';
+  // echo '<pre>';
+  //    print_r($request2->fetch(PDO::FETCH_ASSOC));
+  // echo '</pre>';
 
   /**
    * requête pour afficher les categories pour la page 1 de categorie.php 
@@ -78,17 +79,18 @@ try
 
   $request3->execute();
 
-  echo '<table bordure="1">';
+  echo '<div id="global" width=100% text-align="center">';
+  echo '<table bordure="1" >';
       for ($j=0; $j<2;$j++) {
          echo '<tr>';
 
          for($i=0; $i<3; $i++) {
             $categories=$request3->fetch(PDO::FETCH_ASSOC);
      
-             echo '<td>';
-                echo '<img src="../'. $categories['chemin_image'] .'" />';
-                echo  '<p>'. $categories['nom']. '</p>';
-                echo  '<p>'. $categories['prix']. '€ </p>';
+             echo '<td align="center" valign="middle">';
+                echo '<img src="../'. $categories['chemin_image'] .'" alt= "'.$categories['nom'].'" title="'.$categories['nom'].' Cliquez pour en savoir plus! "  height="250" width="250" />';
+                echo  '<p> <B>'. $categories['nom']. ' </B> </p>';
+                echo  '<p> <B>'. $categories['prix']. '€ </B> </p>';
                 echo '<p>'. $categories['couleur']. '</p>';
             echo '</td>';
   
@@ -99,45 +101,11 @@ try
   
   
   echo '</table>';
+  echo '</div>';
 
-//   $sql4='SELECT * FROM image, article WHERE image.id_article=article.id_article and article.nom=? and article.id_article=? and image.num_rv=?'; 
-//   $request4->bindValue(1,"L'océane");
-//   $request4->bindValue(2,1);
-//   $request4->bindValue(3,1);
-//   $request4->execute();
-
-
-
-	//$categories=$request1->fetchAll(PDO::FETCH_ASSOC);
- 
- 
-
-
-// while($categoriesa=$request4->fetch(PDO::FETCH_ASSOC)) {       
-
-//       echo '<td>';
-//           echo '<img src="../'. $categoriesa['chemin_image'] .'" />';
-//           echo  '<p>'. $categoriesa['nom']. '</p>';
-//           echo  '<p>'. $categoriesa['prix']. '€ </p>';
-//           echo '<p>'. $categoriesa['couleur']. '</p>';
-//       echo '</td>';
-
-  
-
-
-
-      // echo '<td>';
-      //     echo '<img src="../'. $categories['chemin_image'] .'" />';
-      //     echo  '<p>'. $categories['nom']. '</p>';
-      //     echo  '<p>'. $categories['prix']. '€ </p>';
-      //     echo '<p>'. $categories['couleur']. '</p>';
-      // echo '</td>';
 
    
 
-//}
-
-//}
 
       
 
