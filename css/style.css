@@ -1,0 +1,32 @@
+b
+{
+    color: rgb(27, 23, 24);
+}
+
+img
+{
+
+border-radius: 20px;     /*créer des bordures sur les images*/
+
+}
+
+
+.titleimage
+{
+    color:rgb(187, 35, 73)
+}
+
+
+/* body
+{
+    margin: 3px;
+} */
+
+#global 
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width:175;*/
+}
+
+
