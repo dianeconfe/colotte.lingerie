@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>toutes les catégories de colotte </title>
-    <link rel="stylesheet" href="../css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="../css/style.css" /> 
+  </head>
 <body>
 
 <?php
@@ -23,7 +23,7 @@ try
    ];
    
 	$PDO= new PDO($DB_DSN,$DB_USER,$DB_PASS, $options);
-    
+  
 	
   
 	/*$sql1='SELECT * FROM image';
@@ -68,31 +68,50 @@ try
   // echo '</pre>';
 
   /**
-   * requête pour afficher les categories pour la page 1 de categorie.php 
+   * requête pour afficher la page 1 des articles de categorie.php 
    */
   
-  $sql3='SELECT * FROM image,article WHERE  image.id_article=article.id_article and article.id_article % 2 =? and image.num_rv=?';
-  $request3 = $PDO->prepare($sql3);
+   function page1() {
+   
+    require("connexionbd.php");
+    $PDO= new PDO($DB_DSN,$DB_USER,$DB_PASS, $options);
+  
 
-  $request3->bindValue(1,1);
-  $request3->bindValue(2,1);
+  $sql1='SELECT * FROM image,article WHERE  image.id_article=article.id_article and article.id_article % 2 =? and image.num_rv=?';
+  $request1 = $PDO->prepare($sql1);
 
-  $request3->execute();
+  $request1->bindValue(1,1);
+  $request1->bindValue(2,1);
 
-  echo '<div id="global" width=100% text-align="center">';
-  echo '<table bordure="1" >';
+  $request1->execute();
+  
+   /**
+   * requête pour afficher la page 2 des articles de categorie.php 
+   */
+
+  // $sql4='SELECT * FROM image,article WHERE  image.id_article=article.id_article and article.id_article % 2 =? and article.id_article > 12 and image.num_rv=?';
+  // $request4 = $PDO->prepare($sql4);
+
+  // $request4->bindValue(1,1);
+  // $request4->bindValue(2,1);
+
+  // $request4->execute();
+
+
+  echo '<div style="display: flex; flex-direction: column;align-items: center;"/>';
+   echo '<table border="0" style="width:500px;" >';
       for ($j=0; $j<2;$j++) {
-         echo '<tr>';
+         echo '<tr valign="middle">';
 
          for($i=0; $i<3; $i++) {
-            $categories=$request3->fetch(PDO::FETCH_ASSOC);
+            $categories1=$request1->fetch(PDO::FETCH_ASSOC);
      
-             echo '<td align="center" valign="middle">';
-                echo '<img src="../'. $categories['chemin_image'] .'" alt= "'.$categories['nom'].'" title="'.$categories['nom'].' Cliquez pour en savoir plus! "  height="250" width="250" />';
-                echo  '<p> <B>'. $categories['nom']. ' </B> </p>';
-                echo  '<p> <B>'. $categories['prix']. '€ </B> </p>';
-                echo '<p>'. $categories['couleur']. '</p>';
-            echo '</td>';
+             echo '<td style="text-align:center;" valign="middle" >';
+                  echo '<img src="../'. $categories1['chemin_image'] .'" alt= "'.$categories1['nom'].'" title="'.$categories1['nom'].' Cliquez pour en savoir plus! "  height="250" width="250" />';
+                  echo  '<p> <B>'. $categories1['nom']. ' </B> </p>';
+                  echo  '<p> <B>'. $categories1['prix']. '€ </B> </p>';
+                  echo '<p>'. $categories1['couleur']. '</p>';
+             echo '</td>';
   
           }
             
@@ -100,17 +119,165 @@ try
       }
   
   
-  echo '</table>';
+   echo '</table>';
   echo '</div>';
+    }
+
+  /*
+       lien pour aller à la page 2 des categories
+  */
+      // $nbpages= [1,2,3];
+      // for ($i=0; $i<3; $i++){
+      //   echo '<a href= "categorie.php?nbpages=' .$nbpages[$i]. '">'   .$nbpages[$i]. '  </a>';
+
+      // }
+
+  
+      // // if ($_GET['nbpages'] == 2 ) {
+      // //    page2();
+      // // }
+
+   function page2(){
+    require("connexionbd.php");
+ 
+    $PDO= new PDO($DB_DSN,$DB_USER,$DB_PASS, $options);
+  
+    $sql2='SELECT * FROM image,article WHERE  image.id_article=article.id_article and article.id_article % 2 =? and article.id_article > 12 and image.num_rv=?';
+    $request2 = $PDO->prepare($sql2);
+
+    $request2->bindValue(1,1);
+    $request2->bindValue(2,1);
+
+    $request2->execute();
 
 
+      echo '<div style="display: flex; flex-direction: column;align-items: center;"/>';
+      echo '<table border="0" style="width:500px;" >';
+         for ($j=0; $j<2;$j++) {
+            echo '<tr valign="middle">';
    
+            for($i=0; $i<3; $i++) {
+               $categories2=$request2->fetch(PDO::FETCH_ASSOC);
+        
+                echo '<td style="text-align:center;" valign="middle" >';
+                     echo '<img src="../'. $categories2['chemin_image'] .'" alt= "'.$categories2['nom'].'" title="'.$categories2['nom'].' Cliquez pour en savoir plus! "  height="250" width="250" />';
+                     echo  '<p> <B>'. $categories2['nom']. ' </B> </p>';
+                     echo  '<p> <B>'. $categories2['prix']. '€ </B> </p>';
+                     echo '<p>'. $categories2['couleur']. '</p>';
+                echo '</td>';
+     
+             }
+               
+           echo '</tr>';
+         }
+     
+     
+      echo '</table>';
+     echo '</div>';
+   
+     
+    }
 
+    function page3(){
+      require("connexionbd.php");
+   
+      $PDO= new PDO($DB_DSN,$DB_USER,$DB_PASS, $options);
+    
+      $sql3='SELECT * FROM image,article WHERE  image.id_article=article.id_article and article.id_article % 2 =? and article.id_article > 23 and article.id_article != 27 and image.num_rv=?';
+    $request3 = $PDO->prepare($sql3);
+  
+    $request3->bindValue(1,1);
+    $request3->bindValue(2,1);
+  
+    $request3->execute();
+  
+    
+      echo '<div style="display: flex; flex-direction: column;align-items: center;"/>';
+        echo '<table border="0" style="width:500px;" >';
+           for ($j=0; $j<1;$j++) {
+              echo '<tr valign="middle">';
+     
+              for($i=0; $i<3; $i++) {
+                 $categories3=$request3->fetch(PDO::FETCH_ASSOC);
+          
+                  echo '<td style="text-align:center;" valign="middle" >';
+                       echo '<img src="../'. $categories3['chemin_image'] .'" alt= "'.$categories3['nom'].'" title="'.$categories3['nom'].' Cliquez pour en savoir plus! "  height="250" width="250"  />';
+                       /*echo '<a href= "article.php?article=' .$categories3['nom']. '">'   .$categories3['chemin_image'].  '  </a>';*/
+                       echo  '<p> <B>'. $categories3['nom']. ' </B> </p>';
+                       echo  '<p> <B>'. $categories3['prix']. '€ </B> </p>';
+                       echo '<p>'. $categories3['couleur']. '</p>';
+                  echo '</td>';
+       
+               }
+                 
+             echo '</tr>';
+           }
+       
+       
+        echo '</table>';
+      echo '</div>';
+
+
+    }
+
+    
+
+    // $nbpages= [1,2,3];
+    
+    // for ($i=0; $i<3; $i++){
+      
+    //   echo '<a href= "categorie.php?nbpages=' .$nbpages[$i]. '">'   .$nbpages[$i].  '  </a>';
+      
+    // }
+   
+    $nbpages= [1,2,3];
+?>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center bg-light" >
+         <?php for ($i=0; $i<3; $i++){
+              echo '<li class="page-item"><a class="page-link" href= "categorie.php?nbpages=' .$nbpages[$i]. '">'   .$nbpages[$i]. '  </a></li>';
+           }
+        ?>
+     </ul>
+    </nav>
+
+<?php
+    if ($_GET['nbpages'] == 1) {
+          page1();
+    }
+    else if ($_GET['nbpages'] == 2 ) {
+          page2();
+    }
+    else if ($_GET['nbpages'] == 3) {
+         page3();
+    }
+    else {
+         page1();
+    } 
+        
+   /* $nbpages= [1,2,3];*/
+    
+    // for ($i=0; $i<3; $i++){
+      
+    //   echo '<a href= "categorie.php?nbpages=' .$nbpages[$i]. '">'   .$nbpages[$i]. '  </a>';
+      
+    // }
+  
+ ?>
+   
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center bg-light" >
+     <?php for ($i=0; $i<3; $i++){
+      echo '<li class="page-item"><a class="page-link" href= "categorie.php?nbpages=' .$nbpages[$i]. '">'   .$nbpages[$i]. '  </a></li>';
+     }
+     ?>
+    </ul>
+  </nav>
+
+
+<?php
 
       
-
-
-
 }
 catch (PDOException $pe)
 {

@@ -6,10 +6,9 @@ b
 img
 {
 
-border-radius: 20px;     /*créer des bordures sur les images*/
+border-radius: 10px;     /*créer des bordures sur les images*/
 
 }
-
 
 .wrapper{
     display: flex;
@@ -18,6 +17,54 @@ border-radius: 20px;     /*créer des bordures sur les images*/
   }
 
 
+
+a
+{ 
+
+    text-align: center;
+    display: block;
+
+    /* color:rgb(27, 23, 24); */
+    
+    /* outline: none;
+    text-decoration: none;
+     */
+  /* padding: 2px 1px 0; 
+      */
+}
+
+/* a:link {
+    
+    text-decoration: none; 
+   
+  } */
+
+a:visited {
+    color: #ee2080;
+  }
+
+
+
+
+  /* margin: 10px; */
+
+
+/* td
+{
+    margin:5 px;
+} */
+
+
+/* table {
+    border-collapse: separate;
+    border-spacing: 5px; 
+
+}
+
+td {
+    border: 1px ;*/
+    /* padding: 15px;
+  }  */
 /* body
 {
     margin: 3px;
